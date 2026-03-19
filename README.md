@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HARDRUSH: A Hack Club YSWS Event
 
-## Getting Started
+## The Mission
+HARDRUSH is a "You Ship, We Ship" (YSWS) challenge created by Hack Club. The premise is simple: build a small robot or smart device that solves a real-life problem. It could be a device that waters your plants, reminds you about tasks, controls your room's lights, or automates a daily routine.
 
-First, run the development server:
+## How It Works
+As participants build and document their progress, they convert their focused engineering hours into **CELLS**. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To complete the mission and claim the hardware, students must:
+* Push their source code to GitHub.
+* Write a pristine, human-written README (strictly without AI).
+* Include a video presentation link of their working prototype.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Once the project is reviewed, Hack Club ships real-world engineering gear directly to the creator's door.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## The Loot
+The loot pool includes high-quality gear for future projects:
+* **3D Printers:** For standout projects that push the limits.
+* **Microcontrollers:** Raspberry Pis, ESP32s, and Arduinos.
+* **Robotics Kits:** Servos, motors, and structural parts.
+* **Sensor Packs:** Lidar, cameras, temp & humidity modules.
+* **Hack Club Merch:** Exclusive stickers and apparel.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Eligibility & Cost
+* **Who can participate:** Open to teenagers ages 13 through 18 from anywhere in the world.
+* **Cost:** The program is entirely free. It is funded by Hack Club, a US-based 501(c)(3) charity helping teens learn how to design and code, with sponsors such as GitHub.
