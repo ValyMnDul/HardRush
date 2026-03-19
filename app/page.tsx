@@ -1,12 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Referință pentru secțiunea de timeline pentru a calcula scroll-ul exact
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start center", "end center"]
+  });
+
+  // Transformăm progresia scroll-ului (0 la 1) în procente pentru înălțimea firului și poziția punctului
+  const dotPosition = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,6 +75,59 @@ export default function Home() {
   ];
 
   const repeatedPrizes = [...prizes, ...prizes];
+
+  const steps = [
+    { title: "Identify a Problem", desc: "Look around your room or daily routine. What's annoying? What needs automation? Think of a small device that fixes it." },
+    { title: "Accumulate Cells", desc: "Start building and documenting. Every hour of focused engineering earns you Cells. Track your progress." },
+    { title: "Ship & Claim", desc: "Push your code to GitHub with a pristine, human-written README. Include a video of your prototype. We review it, we ship your prize." }
+  ];
+
+  // Funcție pentru a randa cardurile din timeline
+  const renderCard = (step: { title: string; desc: string }, i: number, align: 'left' | 'right') => (
+    <motion.div
+      initial="inactive"
+      whileInView="active"
+      // Se activează fix când elementul ajunge la jumătatea ecranului (acolo unde e și punctul roșu)
+      viewport={{ once: false, margin: "0px 0px -50% 0px" }}
+      variants={{
+        inactive: { opacity: 0.3, borderColor: "rgba(30, 41, 59, 1)", scale: 0.95 },
+        active: { opacity: 1, borderColor: "rgba(236, 55, 80, 0.6)", scale: 1 }
+      }}
+      className={`relative rounded-3xl border bg-slate-900/80 p-8 md:p-10 backdrop-blur-md shadow-2xl overflow-hidden transition-all duration-700 ${align === 'right' ? 'md:text-right' : 'text-left'}`}
+    >
+      <motion.div 
+        variants={{
+          inactive: { color: "rgba(30, 41, 59, 0.3)", scale: 1 },
+          active: { color: "rgba(236, 55, 80, 0.15)", scale: 1.1 }
+        }}
+        className={`absolute -top-6 text-[10rem] font-black leading-none z-0 select-none transition-all duration-700 hidden md:block ${align === 'right' ? '-left-6' : '-right-6'}`}
+      >
+        0{i + 1}
+      </motion.div>
+      <motion.div 
+        variants={{
+          inactive: { color: "rgba(30, 41, 59, 0.3)", scale: 1 },
+          active: { color: "rgba(236, 55, 80, 0.15)", scale: 1.1 }
+        }}
+        className={`absolute -top-4 -right-4 text-[8rem] font-black leading-none z-0 select-none transition-all duration-700 md:hidden`}
+      >
+        0{i + 1}
+      </motion.div>
+      
+      <div className="relative z-10">
+        <motion.h3 
+          variants={{
+            inactive: { color: "#ffffff" },
+            active: { color: "#ec3750" }
+          }}
+          className="text-3xl font-bold mb-4 transition-colors duration-700"
+        >
+          {step.title}
+        </motion.h3>
+        <p className="text-xl text-slate-300 leading-relaxed">{step.desc}</p>
+      </div>
+    </motion.div>
+  );
 
   return (
     <main className="relative min-h-screen bg-[#020617] text-slate-50 selection:bg-[#ec3750] selection:text-white">
@@ -140,46 +204,61 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="relative z-10 py-32 px-6 bg-slate-950/80 backdrop-blur-xl border-y border-slate-900 shadow-2xl">
-        <div className="mx-auto max-w-5xl">
+      {/* TIMELINE SECTION */}
+      <section className="relative z-10 py-32 px-6 bg-slate-950/80 backdrop-blur-xl border-y border-slate-900 shadow-2xl overflow-hidden">
+        <div className="mx-auto max-w-6xl">
+          
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="mb-32 text-center"
+            className="mb-24"
           >
-            <h2 className="text-5xl font-black tracking-tight mb-6">MISSION DIRECTIVES</h2>
-            <div className="h-1 w-24 bg-[#ec3750] mx-auto rounded-full mb-6"></div>
-            <p className="text-xl text-slate-400">Your path to getting hardware shipped to your door.</p>
+            <h2 className="text-5xl md:text-6xl font-black tracking-tight mb-4 text-left">THE BLUEPRINT</h2>
+            <div className="h-1 w-24 bg-[#ec3750] mb-6"></div>
+            <p className="text-xl text-slate-400 text-left max-w-2xl">This is your exact path to getting real hardware shipped to your door. Follow the steps, put in the hours, and claim your loot.</p>
           </motion.div>
 
-          <div className="flex flex-col gap-32">
-            {[
-              { title: "Identify a Problem", desc: "Look around your room or daily routine. What's annoying? What needs automation? Think of a small device that fixes it." },
-              { title: "Accumulate Cells", desc: "Start building and documenting. Every hour of focused engineering earns you Cells. Track your progress." },
-              { title: "Ship & Claim", desc: "Push your code to GitHub with a pristine, human-written README. Include a video of your prototype. We review it, we ship your prize." }
-            ].map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -100 : 100 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-150px" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className={`flex w-full ${i % 2 === 0 ? "justify-start" : "justify-end"}`}
-              >
-                <div className="relative w-full md:w-3/5 rounded-3xl border border-slate-800 bg-slate-900/60 p-10 backdrop-blur-md shadow-2xl hover:border-[#ec3750]/40 transition-colors duration-500 overflow-hidden group">
-                  <div className="absolute -right-10 -top-10 text-[12rem] font-black leading-none text-slate-800/20 z-0 select-none transition-transform duration-700 group-hover:scale-110 group-hover:text-[#ec3750]/10">
-                    0{i + 1}
+          <div ref={timelineRef} className="relative py-10 max-w-5xl mx-auto">
+            
+            {/* Linia de fundal (gri stins) */}
+            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-slate-800 -translate-x-1/2 rounded-full"></div>
+            
+            {/* Linia activă care se colorează la scroll */}
+            <motion.div 
+              style={{ height: lineHeight }}
+              className="absolute left-6 md:left-1/2 top-0 w-1 bg-gradient-to-b from-[#ec3750] to-[#ff7b54] -translate-x-1/2 rounded-full z-10"
+            ></motion.div>
+            
+            {/* Punctul roșu luminos */}
+            <motion.div 
+              style={{ top: dotPosition }}
+              className="absolute left-6 md:left-1/2 w-6 h-6 rounded-full bg-[#020617] border-4 border-[#ec3750] shadow-[0_0_25px_rgba(236,55,80,1)] -translate-x-1/2 -translate-y-1/2 z-20"
+            ></motion.div>
+
+            {steps.map((step, i) => {
+              const isEven = i % 2 === 0;
+              return (
+                <div key={i} className="relative flex items-center w-full mb-32 last:mb-0">
+                  
+                  {/* Aspect pentru Desktop: Alternează Stânga / Dreapta */}
+                  <div className={`hidden md:block w-1/2 ${isEven ? 'pr-20' : 'opacity-0'}`}>
+                    {isEven && renderCard(step, i, 'right')}
                   </div>
                   
-                  <div className="relative z-10">
-                    <h3 className="text-4xl font-bold mb-4 text-white group-hover:text-[#ec3750] transition-colors">{step.title}</h3>
-                    <p className="text-xl text-slate-300 leading-relaxed">{step.desc}</p>
+                  <div className={`hidden md:block w-1/2 ${!isEven ? 'pl-20' : 'opacity-0'}`}>
+                    {!isEven && renderCard(step, i, 'left')}
                   </div>
+
+                  {/* Aspect pentru Mobil: Toate la dreapta liniei */}
+                  <div className="block md:hidden pl-16 w-full">
+                     {renderCard(step, i, 'left')}
+                  </div>
+
                 </div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -199,8 +278,8 @@ export default function Home() {
         </div>
 
         <div className="relative flex overflow-x-hidden group">
-          <div className="absolute top-0 left-0 bottom-0 w-32 bg-gradient-to-r from-[#020617] to-transparent z-20"></div>
-          <div className="absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l from-[#020617] to-transparent z-20"></div>
+          <div className="absolute top-0 left-0 bottom-0 w-32 bg-gradient-to-r from-[#020617] to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l from-[#020617] to-transparent z-20 pointer-events-none"></div>
 
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
