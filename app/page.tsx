@@ -102,7 +102,7 @@ export default function Home() {
           <h1 className="mb-6 text-6xl font-black tracking-tighter sm:text-8xl lg:text-9xl">
             HARD<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ec3750] to-[#ff7b54]">RUSH</span>
           </h1>
-          <p className="mx-auto mb-12 max-w-2xl text-xl text-slate-400 sm:text-2xl font-light">
+          <p className="mx-auto mb-12 max-w-2xl text-xl text-slate-400 sm:text-2xl font-light leading-relaxed">
             Build a small robot that solves a real-life problem. Convert your hours into <strong className="text-white font-bold tracking-wide">CELLS</strong>. We ship you the hardware.
           </p>
 
@@ -140,21 +140,21 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* MISSION DIRECTIVES (Mutat mai sus) */}
-      <section className="relative z-10 py-32 px-6 bg-slate-950/50 backdrop-blur-3xl border-y border-slate-900">
-        <div className="mx-auto max-w-4xl">
+      <section className="relative z-10 py-32 px-6 bg-slate-950/80 backdrop-blur-xl border-y border-slate-900 shadow-2xl">
+        <div className="mx-auto max-w-5xl">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="mb-24 text-center"
+            className="mb-32 text-center"
           >
             <h2 className="text-5xl font-black tracking-tight mb-6">MISSION DIRECTIVES</h2>
+            <div className="h-1 w-24 bg-[#ec3750] mx-auto rounded-full mb-6"></div>
             <p className="text-xl text-slate-400">Your path to getting hardware shipped to your door.</p>
           </motion.div>
 
-          <div className="relative border-l border-slate-800 ml-4 md:ml-12 space-y-16 pb-8">
+          <div className="flex flex-col gap-32">
             {[
               { title: "Identify a Problem", desc: "Look around your room or daily routine. What's annoying? What needs automation? Think of a small device that fixes it." },
               { title: "Accumulate Cells", desc: "Start building and documenting. Every hour of focused engineering earns you Cells. Track your progress." },
@@ -162,26 +162,30 @@ export default function Home() {
             ].map((step, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -100 : 100 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="relative pl-10 md:pl-16"
+                viewport={{ once: true, margin: "-150px" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className={`flex w-full ${i % 2 === 0 ? "justify-start" : "justify-end"}`}
               >
-                <div className="absolute -left-4 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#ec3750] text-sm font-bold text-white shadow-[0_0_15px_rgba(236,55,80,0.5)]">
-                  {i + 1}
+                <div className="relative w-full md:w-3/5 rounded-3xl border border-slate-800 bg-slate-900/60 p-10 backdrop-blur-md shadow-2xl hover:border-[#ec3750]/40 transition-colors duration-500 overflow-hidden group">
+                  <div className="absolute -right-10 -top-10 text-[12rem] font-black leading-none text-slate-800/20 z-0 select-none transition-transform duration-700 group-hover:scale-110 group-hover:text-[#ec3750]/10">
+                    0{i + 1}
+                  </div>
+                  
+                  <div className="relative z-10">
+                    <h3 className="text-4xl font-bold mb-4 text-white group-hover:text-[#ec3750] transition-colors">{step.title}</h3>
+                    <p className="text-xl text-slate-300 leading-relaxed">{step.desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-3xl font-bold mb-4 text-white">{step.title}</h3>
-                <p className="text-lg text-slate-400 leading-relaxed">{step.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* THE LOOT (Mutat mai jos) */}
-      <section className="relative z-10 py-32 overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 mb-16 text-center">
+      <section className="relative z-10 py-40 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-6 mb-20 text-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -189,6 +193,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-5xl font-black tracking-tight mb-4">THE LOOT</h2>
+            <div className="h-1 w-24 bg-[#ec3750] mx-auto rounded-full mb-6"></div>
             <p className="text-xl text-slate-400">Exchange your Cells for real-world engineering gear.</p>
           </motion.div>
         </div>
@@ -225,8 +230,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* INTEL / FAQ */}
-      <section className="relative z-10 py-32 px-6 bg-slate-950/50 backdrop-blur-3xl border-y border-slate-900">
+      <section className="relative z-10 py-32 px-6 bg-slate-950/80 backdrop-blur-3xl border-y border-slate-900">
         <div className="mx-auto max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -234,7 +238,10 @@ export default function Home() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="mb-16 text-center text-5xl font-black tracking-tight">INTEL (FAQ)</h2>
+            <div className="text-center mb-16">
+              <h2 className="text-5xl font-black tracking-tight mb-6">INTEL (FAQ)</h2>
+              <div className="h-1 w-24 bg-[#ec3750] mx-auto rounded-full"></div>
+            </div>
             
             <div className="space-y-4">
               {faqs.map((faq, i) => (
@@ -244,13 +251,13 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm"
+                  className="overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm transition-colors hover:border-slate-700"
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                     className="flex w-full items-center justify-between p-6 text-left focus:outline-none"
                   >
-                    <span className="text-lg font-bold text-white pr-4">{faq.q}</span>
+                    <span className="text-xl font-bold text-white pr-4">{faq.q}</span>
                     <motion.span
                       animate={{ rotate: openFaq === i ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
@@ -267,7 +274,7 @@ export default function Home() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <div className="px-6 pb-6 text-slate-400 leading-relaxed">
+                        <div className="px-6 pb-6 text-slate-400 leading-relaxed text-lg">
                           {faq.a}
                         </div>
                       </motion.div>
