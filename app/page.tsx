@@ -36,11 +36,34 @@ export default function Home() {
   ];
 
   const prizes = [
-    { title: "3D Printers", desc: "For standout projects that push the limits.", icon: "🖨️" },
-    { title: "Microcontrollers", desc: "Raspberry Pis, ESP32s, and Arduinos.", icon: "🔌" },
-    { title: "Robotics Kits", desc: "Servos, motors, and structural parts.", icon: "🤖" },
-    { title: "Sensor Packs", desc: "Lidar, cameras, temp & humidity modules.", icon: "📡" },
+    { 
+      title: "3D Printers", 
+      desc: "For standout projects that push the limits.", 
+      image: "http://googleusercontent.com/image_collection/image_retrieval/10077852107166114510" 
+    },
+    { 
+      title: "Microcontrollers", 
+      desc: "Raspberry Pis, ESP32s, and Arduinos.", 
+      image: "http://googleusercontent.com/image_collection/image_retrieval/11309652824616511047" 
+    },
+    { 
+      title: "Robotics Kits", 
+      desc: "Servos, motors, and structural parts.", 
+      image: "http://googleusercontent.com/image_collection/image_retrieval/5877186618957861715" 
+    },
+    { 
+      title: "Sensor Packs", 
+      desc: "Lidar, cameras, temp & humidity modules.", 
+      image: "http://googleusercontent.com/image_collection/image_retrieval/2255118021567372957" 
+    },
+    { 
+      title: "Hack Club Merch", 
+      desc: "Exclusive stickers and apparel.", 
+      image: "http://googleusercontent.com/image_collection/image_retrieval/3186985389220768444" 
+    },
   ];
+
+  const repeatedPrizes = [...prizes, ...prizes];
 
   return (
     <main className="relative min-h-screen bg-[#020617] text-slate-50 selection:bg-[#ec3750] selection:text-white">
@@ -48,7 +71,7 @@ export default function Home() {
            style={{ backgroundImage: 'linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
       </div>
 
-      <div className="fixed top-0 left-10 z-50">
+      <div className="fixed top-0 left-0 z-50">
         <Image
           src="/flag-orpheus-top.png"
           alt="Hack Club Flag"
@@ -117,42 +140,52 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="relative z-10 py-32 px-6">
-        <div className="mx-auto max-w-5xl">
+      <section className="relative z-10 py-32 overflow-hidden bg-slate-950/50 backdrop-blur-md border-y border-slate-900">
+        <div className="mx-auto max-w-7xl px-6 mb-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8 }}
-            className="mb-24 text-center"
           >
-            <h2 className="text-5xl font-black tracking-tight mb-6">THE LOOT</h2>
+            <h2 className="text-5xl font-black tracking-tight mb-4">THE LOOT</h2>
             <p className="text-xl text-slate-400">Exchange your Cells for real-world engineering gear.</p>
           </motion.div>
+        </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {prizes.map((prize, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="group relative rounded-2xl border border-slate-800 bg-slate-900/50 p-8 hover:border-[#ec3750]/50 transition-colors backdrop-blur-md"
+        <div className="relative flex overflow-x-hidden group">
+          <div className="absolute top-0 left-0 bottom-0 w-32 bg-gradient-to-r from-[#020617] to-transparent z-20"></div>
+          <div className="absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l from-[#020617] to-transparent z-20"></div>
+
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ repeat: Infinity, ease: "linear", duration: 30 }}
+            className="flex gap-8 w-max px-4 hover:[animation-play-state:paused]"
+          >
+            {repeatedPrizes.map((prize, i) => (
+              <div 
+                key={i} 
+                className="relative w-80 shrink-0 rounded-2xl border border-slate-800 bg-slate-900 overflow-hidden group/card hover:border-[#ec3750] transition-colors"
               >
-                <div className="absolute inset-0 bg-gradient-to-b from-[#ec3750]/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100 rounded-2xl"></div>
-                <div className="relative z-10">
-                  <div className="text-5xl mb-6">{prize.icon}</div>
-                  <h3 className="mb-3 text-2xl font-bold">{prize.title}</h3>
-                  <p className="text-slate-400">{prize.desc}</p>
+                <div className="h-56 w-full overflow-hidden relative">
+                  <div className="absolute inset-0 bg-[#ec3750]/20 mix-blend-overlay z-10 group-hover/card:opacity-0 transition-opacity"></div>
+                  <img 
+                    src={prize.image} 
+                    alt={prize.title} 
+                    className="w-full h-full object-cover grayscale-[50%] group-hover/card:grayscale-0 group-hover/card:scale-110 transition-all duration-700"
+                  />
                 </div>
-              </motion.div>
+                <div className="p-6 relative z-20 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent">
+                  <h3 className="mb-2 text-2xl font-bold text-white group-hover/card:text-[#ec3750] transition-colors">{prize.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">{prize.desc}</p>
+                </div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="relative z-10 py-32 px-6 bg-slate-950/50 backdrop-blur-3xl border-y border-slate-900">
+      <section className="relative z-10 py-32 px-6">
         <div className="mx-auto max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -190,7 +223,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 py-32 px-6">
+      <section className="relative z-10 py-32 px-6 bg-slate-950/50 backdrop-blur-3xl border-y border-slate-900">
         <div className="mx-auto max-w-3xl">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -244,7 +277,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="relative z-10 border-t border-slate-800 bg-[#020617] py-20 px-6 text-slate-400">
+      <footer className="relative z-10 bg-[#020617] py-20 px-6 text-slate-400">
         <div className="mx-auto max-w-6xl">
           <div className="flex flex-col justify-between gap-16 md:flex-row">
             <div className="max-w-xl">
