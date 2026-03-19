@@ -140,7 +140,47 @@ export default function Home() {
         </motion.div>
       </section>
 
-      <section className="relative z-10 py-32 overflow-hidden bg-slate-950/50 backdrop-blur-md border-y border-slate-900">
+      {/* MISSION DIRECTIVES (Mutat mai sus) */}
+      <section className="relative z-10 py-32 px-6 bg-slate-950/50 backdrop-blur-3xl border-y border-slate-900">
+        <div className="mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="mb-24 text-center"
+          >
+            <h2 className="text-5xl font-black tracking-tight mb-6">MISSION DIRECTIVES</h2>
+            <p className="text-xl text-slate-400">Your path to getting hardware shipped to your door.</p>
+          </motion.div>
+
+          <div className="relative border-l border-slate-800 ml-4 md:ml-12 space-y-16 pb-8">
+            {[
+              { title: "Identify a Problem", desc: "Look around your room or daily routine. What's annoying? What needs automation? Think of a small device that fixes it." },
+              { title: "Accumulate Cells", desc: "Start building and documenting. Every hour of focused engineering earns you Cells. Track your progress." },
+              { title: "Ship & Claim", desc: "Push your code to GitHub with a pristine, human-written README. Include a video of your prototype. We review it, we ship your prize." }
+            ].map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                className="relative pl-10 md:pl-16"
+              >
+                <div className="absolute -left-4 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#ec3750] text-sm font-bold text-white shadow-[0_0_15px_rgba(236,55,80,0.5)]">
+                  {i + 1}
+                </div>
+                <h3 className="text-3xl font-bold mb-4 text-white">{step.title}</h3>
+                <p className="text-lg text-slate-400 leading-relaxed">{step.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* THE LOOT (Mutat mai jos) */}
+      <section className="relative z-10 py-32 overflow-hidden">
         <div className="mx-auto max-w-7xl px-6 mb-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -185,44 +225,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-10 py-32 px-6">
-        <div className="mx-auto max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="mb-24 text-center"
-          >
-            <h2 className="text-5xl font-black tracking-tight mb-6">MISSION DIRECTIVES</h2>
-            <p className="text-xl text-slate-400">Your path to getting hardware shipped to your door.</p>
-          </motion.div>
-
-          <div className="relative border-l border-slate-800 ml-4 md:ml-12 space-y-16 pb-8">
-            {[
-              { title: "Identify a Problem", desc: "Look around your room or daily routine. What's annoying? What needs automation? Think of a small device that fixes it." },
-              { title: "Accumulate Cells", desc: "Start building and documenting. Every hour of focused engineering earns you Cells. Track your progress." },
-              { title: "Ship & Claim", desc: "Push your code to GitHub with a pristine, human-written README. Include a video of your prototype. We review it, we ship your prize." }
-            ].map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-                className="relative pl-10 md:pl-16"
-              >
-                <div className="absolute -left-4 top-1 flex h-8 w-8 items-center justify-center rounded-full bg-[#ec3750] text-sm font-bold text-white shadow-[0_0_15px_rgba(236,55,80,0.5)]">
-                  {i + 1}
-                </div>
-                <h3 className="text-3xl font-bold mb-4 text-white">{step.title}</h3>
-                <p className="text-lg text-slate-400 leading-relaxed">{step.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+      {/* INTEL / FAQ */}
       <section className="relative z-10 py-32 px-6 bg-slate-950/50 backdrop-blur-3xl border-y border-slate-900">
         <div className="mx-auto max-w-3xl">
           <motion.div
