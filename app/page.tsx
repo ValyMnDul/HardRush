@@ -8,14 +8,12 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  // Referință pentru secțiunea de timeline pentru a calcula scroll-ul exact
   const timelineRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start center", "end center"]
   });
 
-  // Transformăm progresia scroll-ului (0 la 1) în procente pentru înălțimea firului și poziția punctului
   const dotPosition = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
@@ -82,12 +80,10 @@ export default function Home() {
     { title: "Ship & Claim", desc: "Push your code to GitHub with a pristine, human-written README. Include a video of your prototype. We review it, we ship your prize." }
   ];
 
-  // Funcție pentru a randa cardurile din timeline
   const renderCard = (step: { title: string; desc: string }, i: number, align: 'left' | 'right') => (
     <motion.div
       initial="inactive"
       whileInView="active"
-      // Se activează fix când elementul ajunge la jumătatea ecranului (acolo unde e și punctul roșu)
       viewport={{ once: false, margin: "0px 0px -50% 0px" }}
       variants={{
         inactive: { opacity: 0.3, borderColor: "rgba(30, 41, 59, 1)", scale: 0.95 },
@@ -135,7 +131,7 @@ export default function Home() {
            style={{ backgroundImage: 'linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
       </div>
 
-      <div className="fixed top-0 left-0 z-50">
+      <div className="fixed top-0 left-10 z-50">
         <Image
           src="/flag-orpheus-top.png"
           alt="Hack Club Flag"
@@ -147,7 +143,7 @@ export default function Home() {
       </div>
 
       <section className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 pt-20 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#ec3750]/10 via-transparent to-transparent blur-2xl"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--tw-gradient-stops))] from-[#ec3750]/10 via-transparent to-transparent blur-2xl"></div>
         
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -164,7 +160,7 @@ export default function Home() {
           </motion.div>
           
           <h1 className="mb-6 text-6xl font-black tracking-tighter sm:text-8xl lg:text-9xl">
-            HARD<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ec3750] to-[#ff7b54]">RUSH</span>
+            HARD<span className="text-transparent bg-clip-text bg-linear-to-r from-[#ec3750] to-[#ff7b54]">RUSH</span>
           </h1>
           <p className="mx-auto mb-12 max-w-2xl text-xl text-slate-400 sm:text-2xl font-light leading-relaxed">
             Build a small robot that solves a real-life problem. Convert your hours into <strong className="text-white font-bold tracking-wide">CELLS</strong>. We ship you the hardware.
@@ -172,7 +168,7 @@ export default function Home() {
 
           <form onSubmit={handleSubmit} className="mx-auto flex w-full max-w-lg flex-col gap-4 sm:flex-row relative z-20">
             <div className="relative flex-1 group">
-              <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-r from-[#ec3750] to-purple-600 opacity-20 blur transition group-hover:opacity-40"></div>
+              <div className="absolute -inset-0.5 rounded-lg bg-linear-to-r from-[#ec3750] to-purple-600 opacity-20 blur transition group-hover:opacity-40"></div>
               <input
                 type="email"
                 placeholder="Enter your email to get started"
@@ -204,7 +200,6 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* TIMELINE SECTION */}
       <section className="relative z-10 py-32 px-6 bg-slate-950/80 backdrop-blur-xl border-y border-slate-900 shadow-2xl overflow-hidden">
         <div className="mx-auto max-w-6xl">
           
@@ -221,17 +216,11 @@ export default function Home() {
           </motion.div>
 
           <div ref={timelineRef} className="relative py-10 max-w-5xl mx-auto">
-            
-            {/* Linia de fundal (gri stins) */}
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-1 bg-slate-800 -translate-x-1/2 rounded-full"></div>
-            
-            {/* Linia activă care se colorează la scroll */}
             <motion.div 
               style={{ height: lineHeight }}
-              className="absolute left-6 md:left-1/2 top-0 w-1 bg-gradient-to-b from-[#ec3750] to-[#ff7b54] -translate-x-1/2 rounded-full z-10"
+              className="absolute left-6 md:left-1/2 top-0 w-1 bg-linear-to-b from-[#ec3750] to-[#ff7b54] -translate-x-1/2 rounded-full z-10"
             ></motion.div>
-            
-            {/* Punctul roșu luminos */}
             <motion.div 
               style={{ top: dotPosition }}
               className="absolute left-6 md:left-1/2 w-6 h-6 rounded-full bg-[#020617] border-4 border-[#ec3750] shadow-[0_0_25px_rgba(236,55,80,1)] -translate-x-1/2 -translate-y-1/2 z-20"
@@ -241,8 +230,6 @@ export default function Home() {
               const isEven = i % 2 === 0;
               return (
                 <div key={i} className="relative flex items-center w-full mb-32 last:mb-0">
-                  
-                  {/* Aspect pentru Desktop: Alternează Stânga / Dreapta */}
                   <div className={`hidden md:block w-1/2 ${isEven ? 'pr-20' : 'opacity-0'}`}>
                     {isEven && renderCard(step, i, 'right')}
                   </div>
@@ -250,8 +237,6 @@ export default function Home() {
                   <div className={`hidden md:block w-1/2 ${!isEven ? 'pl-20' : 'opacity-0'}`}>
                     {!isEven && renderCard(step, i, 'left')}
                   </div>
-
-                  {/* Aspect pentru Mobil: Toate la dreapta liniei */}
                   <div className="block md:hidden pl-16 w-full">
                      {renderCard(step, i, 'left')}
                   </div>
@@ -278,8 +263,8 @@ export default function Home() {
         </div>
 
         <div className="relative flex overflow-x-hidden group">
-          <div className="absolute top-0 left-0 bottom-0 w-32 bg-gradient-to-r from-[#020617] to-transparent z-20 pointer-events-none"></div>
-          <div className="absolute top-0 right-0 bottom-0 w-32 bg-gradient-to-l from-[#020617] to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute top-0 left-0 bottom-0 w-32 bg-linear-to-r from-[#020617] to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 bottom-0 w-32 bg-linear-to-l from-[#020617] to-transparent z-20 pointer-events-none"></div>
 
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
@@ -293,13 +278,16 @@ export default function Home() {
               >
                 <div className="h-56 w-full overflow-hidden relative">
                   <div className="absolute inset-0 bg-[#ec3750]/20 mix-blend-overlay z-10 group-hover/card:opacity-0 transition-opacity"></div>
-                  <img 
-                    src={prize.image} 
-                    alt={prize.title} 
-                    className="w-full h-full object-cover grayscale-[50%] group-hover/card:grayscale-0 group-hover/card:scale-110 transition-all duration-700"
+                  <Image
+                    src={prize.image}
+                    alt={prize.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 320px"
+                    unoptimized
+                    className="w-full h-full object-cover grayscale-50 group-hover/card:grayscale-0 group-hover/card:scale-110 transition-all duration-700"
                   />
                 </div>
-                <div className="p-6 relative z-20 bg-gradient-to-t from-slate-900 via-slate-900 to-transparent">
+                <div className="p-6 relative z-20 bg-linear-to-t from-slate-900 via-slate-900 to-transparent">
                   <h3 className="mb-2 text-2xl font-bold text-white group-hover/card:text-[#ec3750] transition-colors">{prize.title}</h3>
                   <p className="text-slate-400 text-sm leading-relaxed">{prize.desc}</p>
                 </div>
@@ -340,7 +328,7 @@ export default function Home() {
                     <motion.span
                       animate={{ rotate: openFaq === i ? 180 : 0 }}
                       transition={{ duration: 0.3 }}
-                      className="text-[#ec3750] flex-shrink-0"
+                      className="text-[#ec3750] shrink-0"
                     >
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
                     </motion.span>
