@@ -18,7 +18,7 @@ export default function Home() {
     },
     {
       q: "Who can participate?",
-      a: "Ages 13 through 18, from anywhere in the world can play Hack Club: The Game.",
+      a: "Ages 13 through 18, from anywhere in the world can play Hack Club: The Game. This event is open to everyone!",
     },
     {
       q: "How do I sign up?",
@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      <div className="absolute top-0 left-10 z-50">
+      <div className="absolute top-0 left-0 z-50">
         <Image
           src="/flag-orpheus-top.png"
           alt="Hack Club Flag"
@@ -60,7 +60,7 @@ export default function Home() {
             Turn your time into <span className="text-[#ec3750]">hardware.</span>
           </h1>
           <p className="mb-10 text-lg text-slate-400 sm:text-2xl">
-            Build a small robot that solves a real-life problem. Work hard, earn <strong className="text-white">Cells</strong>, and we&apos;ll ship you the gear to make it real.
+            Build a small robot that solves a real-life problem. Work hard, earn <strong className="text-white">Cells</strong>, and get robotics kits, microcontrollers, or even a 3D printer.
           </p>
 
           <form onSubmit={handleSubmit} className="mx-auto flex w-full max-w-md flex-col gap-3 sm:flex-row">
@@ -104,14 +104,14 @@ export default function Home() {
           >
             <h2 className="mb-6 text-4xl font-bold">How it works</h2>
             <p className="text-xl text-slate-400">
-              Only 7 out of 200 will make it. You build. You document. We ship.
+              Open to everyone. You build. You document. We ship.
             </p>
           </motion.div>
 
           <div className="grid gap-12 md:grid-cols-3">
             {[
               { title: "1. Find a Problem", desc: "Look around your room. What annoys you? Automate it." },
-              { title: "2. Earn Cells", desc: "Every hour of work converts to Cells. Use them to get your parts." },
+              { title: "2. Earn Cells", desc: "Every hour of work converts to Cells. Use them to get your hardware parts." },
               { title: "3. Ship It", desc: "Write a clean README, record a video, and get your prize." }
             ].map((step, i) => (
               <motion.div
@@ -188,35 +188,6 @@ export default function Home() {
                 <a target="_blank" rel="noopener noreferrer" href="https://hackclub.com/conduct" className="hover:text-[#ec3750] transition-colors">Code of Conduct</a>
               </div>
             </div>
-          </div>
-
-          <div className="mt-16 overflow-hidden rounded-xl border border-slate-800" data-controller="responsive-image-map">
-            <img 
-              className="w-full object-cover" 
-              alt="Hack Club Photo" 
-              loading="lazy" 
-              useMap="#footer-credits-map" 
-              data-responsive-image-map-target="image" 
-              src="https://flavortown.hackclub.com/assets/landing/footer/footer-image-3b0eef26.webp" 
-            />
-            <map name="footer-credits-map" data-responsive-image-map-target="map">
-              <area target="_blank" alt="" title="" href="https://github.com/ayessaaa" coords="122,342,353,415" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://cskartikey.dev" coords="437,345,639,426" shape="rect" />
-              <area target="_blank" alt="" title="" href="http://fireentity.space" coords="716,327,929,393" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://github.com/3kh0" coords="1002,337,1164,394" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://me.slevel.xyz" coords="130,463,336,529" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://transcental.dev" coords="426,458,660,525" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://cyteon.dev" coords="708,448,879,525" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://github.com/dhamariT" coords="911,458,1016,507" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://github.com/EDRipper" coords="1035,466,1221,529" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://saahild.com/?ref=flavortown-homepage" coords="194,564,421,631" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://github.com/deoshreyas" coords="504,547,685,645" shape="rect" />
-              <area target="_blank" alt="" title="" href="http://jmeow.net/" coords="743,583,932,642" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://r58playz.dev/" coords="986,577,1189,634" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://lilia.rocks" coords="110,661,294,731" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://instagram.com/e_lee_za.a" coords="385,682,579,779" shape="rect" />
-              <area target="_blank" alt="" title="" href="https://ascpixi.dev" coords="142,782,312,843" shape="rect" />
-            </map>
           </div>
         </div>
       </footer>
