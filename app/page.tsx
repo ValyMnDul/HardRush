@@ -43,12 +43,12 @@ export default function Home() {
       a: "Build a small robot or smart device that solves a real-life problem. It could water your plants, remind you about tasks, control lights, or automate something in your room.",
     },
   ];
-
+ 
   const prizes = [
     { 
       title: "3D Printers", 
       desc: "For standout projects that push the limits.", 
-      image: "http://googleusercontent.com/image_collection/image_retrieval/10077852107166114510" 
+      image: "/prizes/3dp.png" 
     },
     { 
       title: "Microcontrollers", 
