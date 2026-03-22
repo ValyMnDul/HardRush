@@ -51,24 +51,24 @@ export default function Home() {
       image: "/prizes/3dp.png" 
     },
     { 
+      title: "Sensor Packs", 
+      desc: "Lidar, cameras, temp & humidity modules.", 
+      image: "/prizes/kit.png" 
+    },
+    { 
       title: "Microcontrollers", 
       desc: "Raspberry Pis, ESP32s, and Arduinos.", 
-      image: "http://googleusercontent.com/image_collection/image_retrieval/11309652824616511047" 
+      image: "/prizes/esp.jpg" 
     },
     { 
       title: "Robotics Kits", 
       desc: "Servos, motors, and structural parts.", 
-      image: "http://googleusercontent.com/image_collection/image_retrieval/5877186618957861715" 
-    },
-    { 
-      title: "Sensor Packs", 
-      desc: "Lidar, cameras, temp & humidity modules.", 
-      image: "http://googleusercontent.com/image_collection/image_retrieval/2255118021567372957" 
+      image: "/prizes/robot.png" 
     },
     { 
       title: "Hack Club Merch", 
       desc: "Exclusive stickers and apparel.", 
-      image: "http://googleusercontent.com/image_collection/image_retrieval/3186985389220768444" 
+      image: "/prizes/hc.png" 
     },
   ];
 
