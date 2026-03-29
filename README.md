@@ -24,3 +24,7 @@ The loot pool includes high-quality gear for future projects:
 ## Eligibility & Cost
 * **Who can participate:** Open to teenagers ages 13 through 18 from anywhere in the world.
 * **Cost:** The program is entirely free. It is funded by Hack Club, a US-based 501(c)(3) charity helping teens learn how to design and code, with sponsors such as GitHub.
+
+## Contributing
+
+Feel free to open an issue or submit a pull request to contribute or suggest features
